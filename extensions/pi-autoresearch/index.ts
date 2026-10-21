@@ -17,11 +17,11 @@ import type {
   ExtensionAPI,
   ExtensionContext,
   Theme,
-} from "@mariozechner/pi-coding-agent";
-import { truncateTail, DEFAULT_MAX_BYTES, DEFAULT_MAX_LINES, formatSize } from "@mariozechner/pi-coding-agent";
-import { StringEnum } from "@mariozechner/pi-ai";
-import { Text, truncateToWidth, matchesKey, visibleWidth } from "@mariozechner/pi-tui";
-import { Type } from "@sinclair/typebox";
+} from "@earendil-works/pi-coding-agent";
+import { truncateTail, DEFAULT_MAX_BYTES, DEFAULT_MAX_LINES, formatSize } from "@earendil-works/pi-coding-agent";
+import { StringEnum } from "@earendil-works/pi-ai";
+import { Text, truncateToWidth, matchesKey, visibleWidth } from "@earendil-works/pi-tui";
+import { Type } from "typebox";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -1125,7 +1125,7 @@ export default function autoresearchExtension(pi: ExtensionAPI) {
         const msg = entry.message;
         if (msg.role !== "toolResult" || msg.toolName !== "log_experiment")
           continue;
-        const details = msg.details as LogDetails | undefined;
+        const details = msg.details as unknown as LogDetails | undefined;
         if (details?.state) {
           runtime.state = cloneExperimentState(details.state);
           state = runtime.state;
@@ -2827,7 +2827,6 @@ export default function autoresearchExtension(pi: ExtensionAPI) {
         runtime.lastAutoResumeTime = 0;
         runtime.autoResumeTurns = 0;
         runtime.experimentsThisSession = 0;
-        runtime.pendingCompactResume = false;
         runtime.lastRunChecks = null;
         runtime.lastRunDuration = null;
         runtime.runningExperiment = null;

@@ -19,6 +19,8 @@ Inspired by [karpathy/autoresearch](https://github.com/karpathy/autoresearch). W
 
 ---
 
+Requires Node.js 22.19 or newer and Pi 1.3.0 or newer (`@earendil-works/pi-coding-agent`); the legacy `@mariozechner` host packages are no longer supported.
+
 ## Quick start
 
 ```bash
